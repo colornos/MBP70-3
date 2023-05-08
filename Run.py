@@ -1,3 +1,4 @@
+import multiprocessing
 import sys
 import pygatt.backends
 import logging
@@ -177,18 +178,18 @@ def run_script2():
         print("Program terminated")
         GPIO.cleanup()
         sys.exit()
-
+        
 def main():
-    thread1 = threading.Thread(target=run_script1)
-    thread2 = threading.Thread(target=run_script2)
+    process1 = multiprocessing.Process(target=run_script1)
+    process2 = multiprocessing.Process(target=run_script2)
 
-    # Start both threads
-    thread1.start()
-    thread2.start()
+    # Start both processes
+    process1.start()
+    process2.start()
 
-    # Wait for both threads to finish
-    thread1.join()
-    thread2.join()
+    # Wait for both processes to finish
+    process1.join()
+    process2.join()
 
 if __name__ == "__main__":
     main()
